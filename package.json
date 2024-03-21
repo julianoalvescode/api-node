@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node build/server.js",
-    "dev": "tsx watch src/server.ts",
+    "dev": "tsx --watch src/server.ts",
     "build": "tsup src/* --minify --out-dir build",
     "docker:run": "docker-compose up -d",
     "prisma:migrate": "npx prisma migrate dev",

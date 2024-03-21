@@ -4,18 +4,24 @@ import { UserAlreadyExistError } from "./errors/user-already-exist";
 import { User } from "@prisma/client";
 
 interface RegisterUseCaseRequest {
+  name: string;
   email: string;
   password: string;
-  name: string;
+}
+
+interface RegisterUseCaseResponse {
+  user: User;
 }
 
 export class RegisterUseCase {
   constructor(private userRepository: UserRepository) {}
 
-  async execute(params: RegisterUseCaseRequest): Promise<{ user: User }> {
-    const { email, password, name } = params;
-
-    const password_hash = await hash(password, 6);
+  async execute({
+    name,
+    email,
+    password,
+  }: RegisterUseCaseRequest): Promise<RegisterUseCaseResponse> {
+    const password_hash = await hash(password, 10);
 
     const userWithSameEmail = await this.userRepository.findByEmail(email);
 
@@ -24,9 +30,9 @@ export class RegisterUseCase {
     }
 
     const user = await this.userRepository.create({
+      name,
       email,
       password_hash,
-      name,
     });
 
     return {

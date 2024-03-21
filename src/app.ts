@@ -3,7 +3,7 @@ import { appRoutes } from "./http/routes";
 import { ZodError } from "zod";
 import { env } from "./env";
 
-export const app = fastify({ logger: true });
+export const app = fastify();
 
 app.register(appRoutes);
 app.setErrorHandler((error, _, reply) => {

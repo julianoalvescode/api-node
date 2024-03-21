@@ -6,7 +6,7 @@ import { UserRepository } from "./../users-repository";
 export class PrismaUserRepository implements UserRepository {
   async create(params: Prisma.UserCreateInput): Promise<User> {
     const { email, password_hash, name } = params;
-    const _password_hash = await hash(password_hash, 6);
+    const _password_hash = await hash(password_hash, 10);
     return await prisma.user.create({
       data: {
         email,

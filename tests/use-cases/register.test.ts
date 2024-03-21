@@ -1,23 +1,13 @@
+import { InMemoryUsersRepository } from "@/repositories/in-memory/in-memory-users-repository";
+import { UserAlreadyExistError } from "@/use-cases/errors/user-already-exist";
 import { RegisterUseCase } from "@/use-cases/register";
 import { compare } from "bcryptjs";
 import { describe, it, expect } from "vitest";
 
 describe("Suit register use case", () => {
   it("Should hash user password upon registration", async () => {
-    const registerUseCase = new RegisterUseCase({
-      async findByEmail(_email) {
-        return null;
-      },
-      async create(data) {
-        return {
-          id: "user-1",
-          name: data.name,
-          email: data.email,
-          password_hash: data.password_hash,
-          created_at: new Date(),
-        };
-      },
-    });
+    const userRepository = new InMemoryUsersRepository();
+    const registerUseCase = new RegisterUseCase(userRepository);
 
     const { user } = await registerUseCase.execute({
       name: "John Doe",
@@ -31,5 +21,26 @@ describe("Suit register use case", () => {
     );
 
     expect(isPasswordCorrectlyHashed).toBe(true);
+  });
+
+  it("Should not be able to register a user with the same email", async () => {
+    const userRepository = new InMemoryUsersRepository();
+    const registerUseCase = new RegisterUseCase(userRepository);
+
+    const email = "jonhdoe@gmail.com";
+
+    await registerUseCase.execute({
+      name: "John Doe",
+      email,
+      password: "123456",
+    });
+
+    await expect(() =>
+      registerUseCase.execute({
+        name: "John Doe",
+        email,
+        password: "123456",
+      })
+    ).rejects.toBeInstanceOf(UserAlreadyExistError);
   });
 });

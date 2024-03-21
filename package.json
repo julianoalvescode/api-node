@@ -9,7 +9,9 @@
     "build": "tsup src/* --minify --out-dir build",
     "docker:run": "docker-compose up -d",
     "prisma:migrate": "npx prisma migrate dev",
-    "prisma:studio": "npx prisma studio"
+    "prisma:studio": "npx prisma studio",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",

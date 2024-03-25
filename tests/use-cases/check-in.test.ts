@@ -9,15 +9,15 @@ let gymRepository: InMemoryGymsRepository;
 let sut: ChecKInUseCase;
 
 describe("Suit check in case", () => {
-  beforeEach(async () => {
+  beforeEach(() => {
     checkInRepository = new InMemoryCheckInsRepository();
     gymRepository = new InMemoryGymsRepository();
     sut = new ChecKInUseCase(checkInRepository, gymRepository);
 
-    await gymRepository.items.push({
+    gymRepository.items.push({
       id: "gym-id",
-      latitude: new Decimal(0),
-      longitude: new Decimal(0),
+      latitude: new Decimal(6.3447347),
+      longitude: new Decimal(-75.6112468),
       title: "Gym",
       description: "Gym description",
       phone: "123456",
@@ -63,5 +63,26 @@ describe("Suit check in case", () => {
     });
 
     expect(checkIn?.gym_id).toEqual(expect.any(String));
+  });
+
+  it("Should not be able to check-in in on distant gym", async () => {
+    gymRepository.items.push({
+      id: "gym-02",
+      latitude: new Decimal(-22.8768314),
+      longitude: new Decimal(-43.2660772),
+      title: "Gym",
+      description: "Gym description",
+      phone: "123456",
+    });
+
+    expect(
+      async () =>
+        await sut.execute({
+          gymId: "gym-02",
+          userId: "user-id",
+          userLatitude: 6.3447347,
+          userLongitude: -75.6112468,
+        })
+    ).rejects.toBeInstanceOf(Error);
   });
 });

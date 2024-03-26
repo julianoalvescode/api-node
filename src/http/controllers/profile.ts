@@ -3,7 +3,7 @@ import { z } from "zod";
 import { makeGetProfileUseCase } from "@/use-cases/factories/make-get-profile-use-case";
 import { ResourceNotFoundError } from "@/use-cases/errors/resource-not-found";
 
-export async function getProfile(request: FastifyRequest, reply: FastifyReply) {
+export async function profile(request: FastifyRequest, reply: FastifyReply) {
   const authenticateUserSchema = z.object({
     id: z.string(),
   });

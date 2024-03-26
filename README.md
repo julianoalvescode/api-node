@@ -13,7 +13,7 @@ GymPass style app.
 - [ ] Users must be able to search for gyms by name
 - [x] Users must be able to check-in at a gym;
 - [ ] Users must be able to validate their check-in;
-- [ ] Gyms must be able to be registered
+- [x] Gyms must be able to be registered
 
 ## Business Rules
 

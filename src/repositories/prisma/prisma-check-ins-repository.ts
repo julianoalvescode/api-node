@@ -7,7 +7,7 @@ export class PrismaCheckInsRepository implements CheckInsRepository {
   public items: Checkin[] = [];
 
   async create(data: Prisma.CheckinUncheckedCreateInput) {
-    const checkIn = prisma.checkin.create({
+    const checkIn = await prisma.checkin.create({
       data,
     });
 
@@ -21,7 +21,7 @@ export class PrismaCheckInsRepository implements CheckInsRepository {
     const startOfTheDay = dayjs(date).startOf("day");
     const endOfTheDay = dayjs(date).endOf("day");
 
-    const checkInOnSameDate = prisma.checkin.findFirst({
+    const checkInOnSameDate = await prisma.checkin.findFirst({
       where: {
         user_id: userId,
         created_at: {
@@ -35,7 +35,7 @@ export class PrismaCheckInsRepository implements CheckInsRepository {
   }
 
   async findManyByUserId(userId: string, page: number) {
-    const checkIns = prisma.checkin.findMany({
+    const checkIns = await prisma.checkin.findMany({
       where: {
         user_id: userId,
       },
@@ -47,7 +47,7 @@ export class PrismaCheckInsRepository implements CheckInsRepository {
   }
 
   async countByUserId(userId: string) {
-    const checkInsCount = prisma.checkin.count({
+    const checkInsCount = await prisma.checkin.count({
       where: {
         user_id: userId,
       },
@@ -57,7 +57,7 @@ export class PrismaCheckInsRepository implements CheckInsRepository {
   }
 
   async findById(id: string) {
-    const checkIn = prisma.checkin.findUnique({
+    const checkIn = await prisma.checkin.findUnique({
       where: {
         id,
       },
@@ -67,7 +67,7 @@ export class PrismaCheckInsRepository implements CheckInsRepository {
   }
 
   async save(checkIn: Checkin) {
-    const updatedCheckIn = prisma.checkin.update({
+    const updatedCheckIn = await prisma.checkin.update({
       where: {
         id: checkIn.id,
       },

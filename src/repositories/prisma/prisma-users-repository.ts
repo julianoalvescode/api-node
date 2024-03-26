@@ -1,6 +1,5 @@
 import { prisma } from "@/prisma/prisma";
 import { Prisma, User } from "@prisma/client";
-import { hash } from "bcryptjs";
 import { UserRepository } from "./../users-repository";
 
 export class PrismaUserRepository implements UserRepository {

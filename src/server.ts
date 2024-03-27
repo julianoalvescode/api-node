@@ -1,9 +1,12 @@
 import { app } from "./app";
 import { env } from "./env";
 
-app
-  .listen({
+app.listen(
+  {
     port: env.PORT,
     host: "0.0.0.0",
-  })
-  .then((address) => console.log(`Server listening on ${address}`));
+  },
+  (_err, address) => {
+    console.log(`🚀 API RESTFUL running on: ${address}`);
+  }
+);

@@ -11,8 +11,8 @@ app.register(fastifyJwt, {
   secret: env.JWT_SECRET,
 });
 
-app.register(usersRouter);
 app.register(gymsRoutes);
+app.register(usersRouter);
 
 app.setErrorHandler((error, _, reply) => {
   if (error instanceof ZodError) {

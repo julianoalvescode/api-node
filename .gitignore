@@ -1,6 +1,5 @@
 node_modules
 build
-yarn.lock
 .env
 coverage
 package-lock.json

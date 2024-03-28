@@ -1,6 +1,14 @@
 # App
 
-GymPass style app.
+GymPass API built Node.JS
+
+## Technologies
+
+- 👨‍💻 TypeScript
+- ⚙️ Fastify
+- :rocket: Vite, Vitest
+- 👁️ BCrypt, JWT
+- 💽 Prisma ORM
 
 ## Functional Requirements
 
@@ -21,12 +29,12 @@ GymPass style app.
 - [x] Users cannot perform 2 check-ins on the same day;
 - [x] Users cannot check-in if they are not near (100m) the gym;
 - [x] Check-ins can only be validated up to 20 minutes after creation;
-- [ ] Check-ins can only be validated by administrators
-- [ ] Gyms can only be registered by administrators;
+- [x] Check-ins can only be validated by administrators
+- [x] Gyms can only be registered by administrators;
 
 ## Non-Functional Requirements
 
 - [x] User passwords need to be encrypted
 - [x] Application data must be persisted in a PostgreSQL database
 - [x] All data lists must be paginated with 20 items per page
-- [ ] Users must be identified by a JWT (JSON Web Token)
+- [x] Users must be identified by a JWT (JSON Web Token)

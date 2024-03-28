@@ -9,6 +9,7 @@ GymPass API built Node.JS
 - :rocket: Vite, Vitest
 - 👁️ BCrypt, JWT
 - 💽 Prisma ORM, PostgreSQL
+- 💽 Github Actions
 
 ## Functional Requirements
 
